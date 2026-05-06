@@ -4907,14 +4907,20 @@
       showScreen(SCREENS.BLOCK_SELECTION);
           
           // Bloqueia o "puxar para atualizar" via JavaScript
-          document.body.addEventListener('touchmove', function(e) {
-              if (window.scrollY === 0) {
-                  e.preventDefault();
-               }
-          }, { passive: false });
+          let touchStart;
 
-          document.documentElement.style.overscrollBehavior = 'none';
-          document.body.style.overscrollBehavior = 'none';
+document.body.addEventListener('touchstart', function(e) {
+    touchStart = e.touches[0].pageY;
+}, { passive: false });
+
+document.body.addEventListener('touchmove', function(e) {
+    const touchMove = e.touches[0].pageY;
+    // Bloqueia APENAS se estiver no topo e tentando puxar para baixo
+    if (window.scrollY === 0 && touchMove > touchStart) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
     </script>
   </body>
 </html>
