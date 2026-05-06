@@ -4897,15 +4897,24 @@
               resetApp();
             }, 1000);
           });
-        }
-      });
-
+        } 
+      }); 
+          
       /* ======================================================
          INICIALIZAÇÃO
          ====================================================== */
-
       // Por enquanto, apenas garante que a tela inicial é a de blocos
       showScreen(SCREENS.BLOCK_SELECTION);
+          
+          // Bloqueia o "puxar para atualizar" via JavaScript
+          document.body.addEventListener('touchmove', function(e) {
+              if (window.scrollY === 0) {
+                  e.preventDefault();
+               }
+          }, { passive: false });
+
+          document.documentElement.style.overscrollBehavior = 'none';
+          document.body.style.overscrollBehavior = 'none';
     </script>
   </body>
 </html>
