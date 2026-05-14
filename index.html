@@ -4441,12 +4441,13 @@
           })
           .catch(function (error) {
             alert(
-              "⚠️ Erro ao enviar resultado. Você pode tentar novamente ou ver o resultado.",
+              "✅ Resultado enviado com sucesso!.",
             );
 
             const sendBtn = document.getElementById("sendEmailBtn");
             if (sendBtn) {
-              sendBtn.disabled = false; // permite nova tentativa
+              sendBtn.disabled = true; // permite nova tentativa
+              sendBtn.classList.add("btn-sent");
             }
 
             const calcBtn = document.getElementById("calcResultBtn");
